@@ -189,9 +189,9 @@ struct BackwardCompatibilityTests {
     @Test("RFC 5234 rules still work")
     func rfc5234RulesWork() throws {
         // All RFC 5234 core rules should still work
-        try RFC_5234.Validator.validate([0x35], against: RFC_5234.CoreRules.DIGIT)  // "5"
-        try RFC_5234.Validator.validate([0x41], against: RFC_5234.CoreRules.ALPHA)  // "A"
-        try RFC_5234.Validator.validate([0x46], against: RFC_5234.CoreRules.HEXDIG)  // "F"
+        try RFC_5234.Validator.validate([0x35], against: RFC_5234.CoreRules.digit)  // "5"
+        try RFC_5234.Validator.validate([0x41], against: RFC_5234.CoreRules.alpha)  // "A"
+        try RFC_5234.Validator.validate([0x46], against: RFC_5234.CoreRules.hexdig)  // "F"
     }
 
     @Test("Default string behavior unchanged")
