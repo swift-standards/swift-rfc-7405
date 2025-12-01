@@ -27,13 +27,13 @@ struct CaseSensitiveStringTests {
         )
 
         // These should all fail
-        #expect(throws: RFC_5234.Validator.ValidationError.self) {
+        #expect(throws: RFC_5234.Validator.Error.self) {
             try RFC_5234.Validator.validate([0x61, 0x62, 0x63], against: rule)  // "abc"
         }
-        #expect(throws: RFC_5234.Validator.ValidationError.self) {
+        #expect(throws: RFC_5234.Validator.Error.self) {
             try RFC_5234.Validator.validate([0x41, 0x42, 0x43], against: rule)  // "ABC"
         }
-        #expect(throws: RFC_5234.Validator.ValidationError.self) {
+        #expect(throws: RFC_5234.Validator.Error.self) {
             try RFC_5234.Validator.validate([0x41, 0x42, 0x63], against: rule)  // "ABc"
         }
     }
@@ -47,7 +47,7 @@ struct CaseSensitiveStringTests {
 
         try RFC_5234.Validator.validate([0x48, 0x54, 0x54, 0x50], against: rule)  // "HTTP" ✓
 
-        #expect(throws: RFC_5234.Validator.ValidationError.self) {
+        #expect(throws: RFC_5234.Validator.Error.self) {
             try RFC_5234.Validator.validate([0x68, 0x74, 0x74, 0x70], against: rule)  // "http" ✗
         }
     }
@@ -61,7 +61,7 @@ struct CaseSensitiveStringTests {
 
         try RFC_5234.Validator.validate([0x68, 0x74, 0x74, 0x70], against: rule)  // "http" ✓
 
-        #expect(throws: RFC_5234.Validator.ValidationError.self) {
+        #expect(throws: RFC_5234.Validator.Error.self) {
             try RFC_5234.Validator.validate([0x48, 0x54, 0x54, 0x50], against: rule)  // "HTTP" ✗
         }
     }
@@ -149,7 +149,7 @@ struct MixedCaseSensitivityTests {
         )
 
         // "get HTTP" ✗ (GET part is case-sensitive)
-        #expect(throws: RFC_5234.Validator.ValidationError.self) {
+        #expect(throws: RFC_5234.Validator.Error.self) {
             try RFC_5234.Validator.validate(
                 [0x67, 0x65, 0x74, 0x20, 0x48, 0x54, 0x54, 0x50],
                 against: rule
@@ -178,7 +178,7 @@ struct MixedCaseSensitivityTests {
         try RFC_5234.Validator.validate([0x47, 0x45, 0x54], against: rule)
 
         // "post" ✗ (POST is case-sensitive)
-        #expect(throws: RFC_5234.Validator.ValidationError.self) {
+        #expect(throws: RFC_5234.Validator.Error.self) {
             try RFC_5234.Validator.validate([0x70, 0x6F, 0x73, 0x74], against: rule)
         }
     }
