@@ -132,7 +132,7 @@ struct MixedCaseSensitivityTests {
             element: .sequence([
                 .terminal(.caseSensitiveString("GET")),  // Must be exactly "GET"
                 .terminal(.byte(0x20)),  // Space
-                .terminal(.caseInsensitiveString("http"))  // Can be any case
+                .terminal(.caseInsensitiveString("http")),  // Can be any case
             ])
         )
 
@@ -164,7 +164,7 @@ struct MixedCaseSensitivityTests {
             name: "test",
             element: .alternation([
                 .terminal(.caseSensitiveString("POST")),  // Exact "POST"
-                .terminal(.caseInsensitiveString("get"))   // Any case "get"
+                .terminal(.caseInsensitiveString("get")),  // Any case "get"
             ])
         )
 
