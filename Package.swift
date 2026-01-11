@@ -26,16 +26,17 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-standards/swift-standards", from: "0.10.0"),
-        .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.6.3"),
-        .package(url: "https://github.com/swift-standards/swift-rfc-5234", from: "0.4.3")
+        .package(path: "../../swift-primitives/swift-standard-library-extensions"),
+        .package(path: "../../swift-primitives/swift-test-primitives"),
+        .package(path: "../swift-incits-4-1986"),
+        .package(path: "../swift-rfc-5234")
     ],
     targets: [
         .target(
             name: "RFC 7405",
             dependencies: [
                 .product(name: "RFC 5234", package: "swift-rfc-5234"),
-                .product(name: "Standards", package: "swift-standards"),
+                .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
                 .product(name: "INCITS 4 1986", package: "swift-incits-4-1986")
             ]
         ),
@@ -43,7 +44,7 @@ let package = Package(
             name: "RFC 7405".tests,
             dependencies: [
                 "RFC 7405",
-                .product(name: "StandardsTestSupport", package: "swift-standards")
+                .product(name: "Test Primitives", package: "swift-test-primitives")
             ]
         )
     ],
