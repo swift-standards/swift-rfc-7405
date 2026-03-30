@@ -27,7 +27,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../../swift-primitives/swift-standard-library-extensions"),
-        .package(path: "../../swift-foundations/swift-ascii"),
+        .package(path: "../../swift-primitives/swift-ascii-primitives"),
         .package(path: "../swift-rfc-5234")
     ],
     targets: [
@@ -36,7 +36,7 @@ let package = Package(
             dependencies: [
                 .product(name: "RFC 5234", package: "swift-rfc-5234"),
                 .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
-                .product(name: "ASCII", package: "swift-ascii")
+                .product(name: "ASCII Primitives", package: "swift-ascii-primitives")
     ]
         ),
         .testTarget(
