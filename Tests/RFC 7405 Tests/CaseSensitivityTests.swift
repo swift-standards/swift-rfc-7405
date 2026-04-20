@@ -4,8 +4,8 @@ import Testing
 
 @Suite("RFC 7405 Case Sensitivity Tests")
 struct CaseSensitivityTests {
-    @Test("Case-insensitive matching using RFC 5234 syntax")
-    func caseInsensitiveMatching() throws {
+    @Test
+    func `Case-insensitive matching using RFC 5234 syntax`() throws {
         let rule = RFC_5234.Rule(
             name: "protocol",
             element: .terminal(.string("HTTP"))
@@ -17,8 +17,8 @@ struct CaseSensitivityTests {
         try RFC_5234.Validator.validate([0x48, 0x74, 0x54, 0x70], against: rule)  // "HtTp"
     }
 
-    @Test("Explicit case-insensitive matching using RFC 7405 syntax")
-    func explicitCaseInsensitiveMatching() throws {
+    @Test
+    func `Explicit case-insensitive matching using RFC 7405 syntax`() throws {
         let rule = RFC_5234.Rule(
             name: "protocol",
             element: .terminal(.caseInsensitiveString("HTTP"))
@@ -30,8 +30,8 @@ struct CaseSensitivityTests {
         try RFC_5234.Validator.validate([0x48, 0x74, 0x54, 0x70], against: rule)  // "HtTp"
     }
 
-    @Test("RFC 7405 case sensitivity - documentation of intended behavior")
-    func caseSensitivityDocumentation() throws {
+    @Test
+    func `RFC 7405 case sensitivity - documentation of intended behavior`() throws {
         // RFC 7405 adds the %s"..." syntax for case-sensitive string matching.
         // The current RFC_5234 Terminal implementation has the infrastructure
         // (the Matcher enum supports caseSensitive: Bool), but the public API
@@ -56,8 +56,8 @@ struct CaseSensitivityTests {
         #expect(true)  // Placeholder: RFC 7405 case-sensitive support awaits Terminal API extension
     }
 
-    @Test("Byte value matching is always case-sensitive")
-    func byteValueMatching() throws {
+    @Test
+    func `Byte value matching is always case-sensitive`() throws {
         // Byte values are inherently case-sensitive
         let rule = RFC_5234.Rule(
             name: "uppercase-a",
@@ -70,8 +70,8 @@ struct CaseSensitivityTests {
         // try RFC_5234.Validator.validate([0x61], against: rule)  // Would fail
     }
 
-    @Test("Byte range matching with ASCII uppercase letters")
-    func byteRangeUppercase() throws {
+    @Test
+    func `Byte range matching with ASCII uppercase letters`() throws {
         let rule = RFC_5234.Rule(
             name: "uppercase-letter",
             element: .terminal(.byteRange(0x41, 0x5A))  // 'A' to 'Z'
@@ -82,8 +82,8 @@ struct CaseSensitivityTests {
         try RFC_5234.Validator.validate([0x4D], against: rule)  // 'M'
     }
 
-    @Test("Byte range matching with ASCII lowercase letters")
-    func byteRangeLowercase() throws {
+    @Test
+    func `Byte range matching with ASCII lowercase letters`() throws {
         let rule = RFC_5234.Rule(
             name: "lowercase-letter",
             element: .terminal(.byteRange(0x61, 0x7A))  // 'a' to 'z'
@@ -94,8 +94,8 @@ struct CaseSensitivityTests {
         try RFC_5234.Validator.validate([0x6D], against: rule)  // 'm'
     }
 
-    @Test("RFC 7405 demonstrates the distinction between syntax cases")
-    func rfc7405SyntaxDistinction() throws {
+    @Test
+    func `RFC 7405 demonstrates the distinction between syntax cases`() throws {
         // RFC 7405 clarifies that:
         // 1. %i"..." - case-insensitive (RFC 7405 addition for explicitness)
         // 2. %s"..." - case-sensitive (RFC 7405 addition for new feature)

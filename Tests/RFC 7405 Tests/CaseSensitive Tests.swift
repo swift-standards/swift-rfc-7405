@@ -9,8 +9,8 @@ import Testing
 
 @Suite("RFC_7405 - Case-Sensitive Strings (%s\"...\")")
 struct CaseSensitiveStringTests {
-    @Test("Case-sensitive string matches exact case")
-    func caseSensitiveMatchesExact() throws {
+    @Test
+    func `Case-sensitive string matches exact case`() throws {
         let rule = RFC_5234.Rule(
             name: "test",
             element: .terminal(.caseSensitiveString("aBc"))
@@ -19,8 +19,8 @@ struct CaseSensitiveStringTests {
         try RFC_5234.Validator.validate([0x61, 0x42, 0x63], against: rule)  // "aBc" ✓
     }
 
-    @Test("Case-sensitive string rejects different case")
-    func caseSensitiveRejectsDifferentCase() {
+    @Test
+    func `Case-sensitive string rejects different case`() {
         let rule = RFC_5234.Rule(
             name: "test",
             element: .terminal(.caseSensitiveString("aBc"))
@@ -38,8 +38,8 @@ struct CaseSensitiveStringTests {
         }
     }
 
-    @Test("Case-sensitive uppercase")
-    func caseSensitiveUppercase() throws {
+    @Test
+    func `Case-sensitive uppercase`() throws {
         let rule = RFC_5234.Rule(
             name: "test",
             element: .terminal(.caseSensitiveString("HTTP"))
@@ -52,8 +52,8 @@ struct CaseSensitiveStringTests {
         }
     }
 
-    @Test("Case-sensitive lowercase")
-    func caseSensitiveLowercase() throws {
+    @Test
+    func `Case-sensitive lowercase`() throws {
         let rule = RFC_5234.Rule(
             name: "test",
             element: .terminal(.caseSensitiveString("http"))
@@ -69,8 +69,8 @@ struct CaseSensitiveStringTests {
 
 @Suite("RFC_7405 - Case-Insensitive Strings (%i\"...\" and \"...\")")
 struct CaseInsensitiveStringTests {
-    @Test("Explicit case-insensitive (%i) matches all cases")
-    func explicitCaseInsensitiveMatchesAll() throws {
+    @Test
+    func `Explicit case-insensitive (%i) matches all cases`() throws {
         let rule = RFC_5234.Rule(
             name: "test",
             element: .terminal(.caseInsensitiveString("abc"))
@@ -83,8 +83,8 @@ struct CaseInsensitiveStringTests {
         try RFC_5234.Validator.validate([0x61, 0x42, 0x63], against: rule)  // "aBc"
     }
 
-    @Test("Default RFC 5234 string() matches all cases")
-    func defaultStringMatchesAll() throws {
+    @Test
+    func `Default RFC 5234 string() matches all cases`() throws {
         // RFC 5234 default behavior: case-insensitive
         let rule = RFC_5234.Rule(
             name: "test",
@@ -97,8 +97,8 @@ struct CaseInsensitiveStringTests {
         try RFC_5234.Validator.validate([0x41, 0x62, 0x43], against: rule)  // "AbC"
     }
 
-    @Test("Explicit %i equals default \"...\"")
-    func explicitEqualsDefault() throws {
+    @Test
+    func `Explicit %i equals default "..."`() throws {
         let explicitRule = RFC_5234.Rule(
             name: "explicit",
             element: .terminal(.caseInsensitiveString("test"))
@@ -124,8 +124,8 @@ struct CaseInsensitiveStringTests {
 
 @Suite("RFC_7405 - Mixed Case Sensitivity")
 struct MixedCaseSensitivityTests {
-    @Test("Sequence with both case-sensitive and case-insensitive")
-    func mixedSequence() throws {
+    @Test
+    func `Sequence with both case-sensitive and case-insensitive`() throws {
         // %s"GET" SP %i"http"
         let rule = RFC_5234.Rule(
             name: "test",
@@ -157,8 +157,8 @@ struct MixedCaseSensitivityTests {
         }
     }
 
-    @Test("Alternation with different case sensitivity")
-    func mixedAlternation() throws {
+    @Test
+    func `Alternation with different case sensitivity`() throws {
         // %s"POST" / %i"get"
         let rule = RFC_5234.Rule(
             name: "test",
@@ -186,16 +186,16 @@ struct MixedCaseSensitivityTests {
 
 @Suite("RFC_7405 - Backward Compatibility")
 struct BackwardCompatibilityTests {
-    @Test("RFC 5234 rules still work")
-    func rfc5234RulesWork() throws {
+    @Test
+    func `RFC 5234 rules still work`() throws {
         // All RFC 5234 core rules should still work
         try RFC_5234.Validator.validate([0x35], against: RFC_5234.CoreRules.digit)  // "5"
         try RFC_5234.Validator.validate([0x41], against: RFC_5234.CoreRules.alpha)  // "A"
         try RFC_5234.Validator.validate([0x46], against: RFC_5234.CoreRules.hexdig)  // "F"
     }
 
-    @Test("Default string behavior unchanged")
-    func defaultStringUnchanged() throws {
+    @Test
+    func `Default string behavior unchanged`() throws {
         // RFC 5234 default string behavior: case-insensitive
         // This should not change with RFC 7405
         let rule = RFC_5234.Rule(
